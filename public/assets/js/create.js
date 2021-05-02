@@ -7,22 +7,28 @@
         event.preventDefault();
 
         const data = new FormData(form);
-        axios.post("/teste", data);
+        axios
+            .post("/cadastrar", data)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     });
 
-    //Show or hide repeat-n-times div
-    const repeat = form.querySelector("#repeat");
-    const repeatForDiv = form.querySelector("#hidden");
-    const repeatForInput = form.querySelector("#repeatFor");
-    repeat.addEventListener("click", function () {
-        if (this.checked) {
-            repeatForDiv.style.display = "block";
-            return;
-        }
+    toggleRepeatNTimesDiv();
+})(toggleRepeatNTimesDiv());
 
+function toggleRepeatNTimesDiv() {
+    const repeat = document.querySelector("#repeat");
+    const repeatForDiv = document.querySelector("#hidden");
+    const repeatForInput = document.querySelector("#repeatFor");
+    repeat.addEventListener("click", function () {
+        repeatForDiv.style.display = "block" || this.checked;
         if (!this.checked) {
             repeatForDiv.style.display = "none";
             repeatForInput.value = "";
         }
     });
-})();
+}
