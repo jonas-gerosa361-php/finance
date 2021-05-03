@@ -2,23 +2,38 @@
     const form = document.querySelector("form");
     const saveButton = document.querySelector("#saveButton");
 
-    //Save button
     saveButton.addEventListener("click", (event) => {
         event.preventDefault();
 
         const data = new FormData(form);
         axios
-            .post("/cadastrar", data)
+            .post("/create-bill", data)
             .then((response) => {
                 console.log(response);
+                if (response.data.success) {
+                    Swal.fire({
+                        icon: "success",
+                        text: response.data.message,
+                    });
+                    eraseForm();
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        text: response.data.message,
+                    });
+                }
             })
             .catch((error) => {
                 console.log(error);
+                Swal.fire({
+                    icon: "error",
+                    text: "Erro inesperado",
+                });
             });
     });
 
     toggleRepeatNTimesDiv();
-})(toggleRepeatNTimesDiv());
+})(toggleRepeatNTimesDiv(), eraseForm());
 
 function toggleRepeatNTimesDiv() {
     const repeat = document.querySelector("#repeat");
@@ -31,4 +46,9 @@ function toggleRepeatNTimesDiv() {
             repeatForInput.value = "";
         }
     });
+}
+
+function eraseForm() {
+    const form = document.querySelector("form");
+    form.reset();
 }

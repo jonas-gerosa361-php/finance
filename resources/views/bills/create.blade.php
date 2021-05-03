@@ -35,6 +35,6 @@
     </div>
     @push('scripts')
         <script src="/assets/js/axios.js"></script>
-        <script src="/assets/js/create.js"></script>        
+        <script src="/assets/js/bills/create.js"></script>        
     @endpush
 @endsection

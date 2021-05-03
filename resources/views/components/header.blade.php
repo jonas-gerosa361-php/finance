@@ -20,7 +20,10 @@
             <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/cadastrar">Cadastrar</a>
+            <a class="nav-link" href="/create-bill">Cadastrar Despesa</a>
+        </li>
+        <li class="nav-item">
+            <a href="/create-income" class="nav-link">Cadastrar Receita</a>
         </li>
       </ul>
     </div>

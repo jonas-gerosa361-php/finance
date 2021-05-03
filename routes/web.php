@@ -8,5 +8,7 @@ Route::get('/', function () {
 
 //TODO: create middleware to auth
 Route::get('/home', '\App\Http\Controllers\HomeController@index');
-Route::get('/cadastrar', '\App\Http\Controllers\HomeController@create');
-Route::post('/cadastrar', '\App\Http\Controllers\HomeController@store');
+Route::get('/create-bill', '\App\Http\Controllers\BillsController@create');
+Route::post('/create-bill', '\App\Http\Controllers\BillsController@store');
+Route::get('/create-income', '\App\Http\Controllers\IncomesController@create');
+Route::post('/create-income', '\App\Http\Controllers\IncomesController@store');
