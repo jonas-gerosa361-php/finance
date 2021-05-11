@@ -11,9 +11,18 @@ class Bills extends Model
     protected $fillable = [
         'name',
         'value',
-        'due-date',
+        'due_date',
         'repeatFor',
         'repeatedFor'
     ];
     protected $table = 'bills';
+
+    public function getRepeatedForAttribute($value)
+    {
+        if ($value > 1) {
+            return $value;
+        }
+
+        return 0;
+    }
 }

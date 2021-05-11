@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Services\StoreBill;
+use \App\Services\Bills\StoreBill;
 
 class BillsController extends Controller
 {

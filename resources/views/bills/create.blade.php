@@ -11,8 +11,8 @@
                 <input required type="text" class="form-control" name="name">
             </div>
             <div class="mb-3">
-                <label class="form-label" for="due-date">Vencimento</label>
-                <input required type="date" class="form-control" name="due-date">
+                <label class="form-label" for="due_date">Vencimento</label>
+                <input required type="date" class="form-control" name="due_date">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="value">Valor</label>

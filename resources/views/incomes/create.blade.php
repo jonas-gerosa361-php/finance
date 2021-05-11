@@ -19,7 +19,7 @@
                 <input required class="form-control" type="text" name="value">
             </div>
             <div class="mb-3">
-                <label class="form-label" for="due-date">Data</label>
+                <label class="form-label" for="due_date">Data</label>
                 <input required type="date" class="form-control" name="date">
             </div>
             <div class="d-flex flex-row-reverse">

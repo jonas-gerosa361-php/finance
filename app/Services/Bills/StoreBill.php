@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Bills;
 
 use App\Models\Bills;
+use App\Exceptions\ValidatorException;
 
 class StoreBill
 {
@@ -12,20 +13,25 @@ class StoreBill
             $this->validate($args);
             Bills::create([
                 'name' => $args['name'],
-                'due-date' => $args['due-date'],
+                'due_date' => $args['due_date'],
                 'value' => $args['value'],
-                'repeatFor' => empty($args['repeat']) ? $args['repeat-n-times'] : null,
+                'repeatFor' => !empty($args['repeat']) ? $args['repeat-n-times'] : null,
             ]);
+            
             return json_encode([
                 'success' => true,
-                'message' => 'Conta inserida com sucesso',
-                'args' => $args
+                'message' => 'Conta inserida com sucesso'
+            ]);
+        } catch (ValidatorException $e) {
+            return json_encode([
+                'success' => false,
+                'message' => $e->getMessage()
             ]);
         } catch (\Exception $e) {
             report($e);
             return json_encode([
                 'success' => false,
-                'message' => 'Erro inesperado'
+                'message' => $e->getMessage()
             ]);
         }
     }
