@@ -12,3 +12,5 @@ Route::get('/create-bill', '\App\Http\Controllers\BillsController@create');
 Route::post('/create-bill', '\App\Http\Controllers\BillsController@store');
 Route::get('/create-income', '\App\Http\Controllers\IncomesController@create');
 Route::post('/create-income', '\App\Http\Controllers\IncomesController@store');
+Route::post('/pay-bill', '\App\Http\Controllers\BillsController@payBill');
+Route::post('/receive-income', '\App\Http\Controllers\IncomesController@receiveIncome');

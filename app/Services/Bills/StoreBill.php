@@ -14,7 +14,7 @@ class StoreBill
             Bills::create([
                 'name' => $args['name'],
                 'due_date' => $args['due_date'],
-                'value' => $args['value'],
+                'value' => str_replace(',', '.', $args['value']),
                 'repeatFor' => !empty($args['repeat']) ? $args['repeat-n-times'] : null,
             ]);
             
@@ -31,13 +31,23 @@ class StoreBill
             report($e);
             return json_encode([
                 'success' => false,
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ]);
         }
     }
 
     private function validate($args)
     {
-        //TODO: Create validation
+        $requiredFields = [
+            'name',
+            'due_date',
+            'value'
+        ];
+
+        foreach ($requiredFields as $required) {
+            if (empty($args[$required])) {
+                throw new ValidatorException("O campo [$required] é obrigatório");
+            }
+        }
     }
 }

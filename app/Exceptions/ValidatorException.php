@@ -2,9 +2,8 @@
 
 namespace App\Exceptions;
 
-class ValidatorException extends Handler
+use Throwable;
+
+class ValidatorException extends \DomainException
 {
-    public function getMessage()
-    {
-    }
 }

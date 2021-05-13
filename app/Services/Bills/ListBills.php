@@ -8,6 +8,6 @@ class ListBills
 {
     public function execute()
     {
-        return Bills::all();
+        return Bills::orderBy('due_date', 'DESC')->get();
     }
 }

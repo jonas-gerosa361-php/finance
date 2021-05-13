@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Bills\PayBill;
 use Illuminate\Http\Request;
 use \App\Services\Bills\StoreBill;
 
@@ -15,5 +16,10 @@ class BillsController extends Controller
     public function store(Request $request, StoreBill $action)
     {
         return $action->execute($request->all());
+    }
+
+    public function payBill(Request $request, PayBill $action)
+    {
+        return $action->execute($request->get('id'));
     }
 }

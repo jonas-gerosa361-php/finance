@@ -4,7 +4,6 @@
 
     saveButton.addEventListener("click", (event) => {
         event.preventDefault();
-
         const data = new FormData(form);
         axios
             .post("/create-income", data)

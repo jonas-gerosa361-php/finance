@@ -19,6 +19,7 @@ class CreateIncomeModelsTable extends Migration
             $table->double('value');
             $table->timestamp('date');
             $table->string('description')->nullable()->default(null);
+            $table->boolean('paid')->default(false);
         });
     }
 

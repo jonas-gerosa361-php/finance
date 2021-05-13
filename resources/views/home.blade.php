@@ -10,11 +10,20 @@
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th>Descrição</th>
-                    <th>Valor</th>
-                    <th>Vencimento</th>
+                    <th>
+                        Descrição
+                    </th>
+                    <th>
+                        Valor
+                    </th>
+                    <th>
+                        Vencimento
+                    </th>
                     <th>
                         Recorrente
+                    </th>
+                    <th>
+                        Paga
                     </th>
                 </tr>
             </thead>
@@ -26,7 +35,7 @@
                                 {{$bill->name}}
                             </td>
                             <td>
-                                {{$bill->value}}
+                                R$ {{$bill->value}}
                             </td>
                             <td>
                                 {{\Carbon\Carbon::parse($bill->due_date)->format('d/m/Y')}}
@@ -36,6 +45,13 @@
                                     {{$bill->repeatedFor}}
                                     /
                                     {{$bill->repeatFor}}
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                @if ($bill->paid) 
+                                    <input onclick="payBill('{{$bill->id}}')" checked type="checkbox" name="paid" id="paid">
+                                @else 
+                                    <input onclick="payBill('{{$bill->id}}')" type="checkbox" name="paid" id="paid">
                                 @endif
                             </td>
                         </tr>
@@ -51,12 +67,21 @@
         </h2>
         <table class="table table-striped">
             <thead class="thead-light">
-                <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Valor</th>
-                    <th scope="col">Data</th>
-                </tr>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Descrição
+                </th>
+                <th>
+                    Valor
+                </th>
+                <th>
+                    Data
+                </th>
+                <th>
+                    Recebido
+                </th>
             </thead>
             <tbody>
                 @if (!empty($incomes))
@@ -69,10 +94,17 @@
                                 {{$income->description}}
                             </td>
                             <td>
-                                {{$income->value}}
+                                R$ {{$income->value}}
                             </td>
                             <td>
                                 {{\Carbon\Carbon::parse($income->date)->format('d/m/Y')}}
+                            </td>
+                            <td class="text-center">
+                                @if ($income->paid)
+                                    <input onclick="receiveIncome('{{$income->id}}')" checked type="checkbox" name="received" id="received">
+                                @else
+                                    <input onclick="receiveIncome('{{$income->id}}')" type="checkbox" name="received" id="received">
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -80,4 +112,6 @@
             </tbody>
         </table>
     </section>
+    <script src="/assets/js/axios.js"></script>
+    <script src="/assets/js/home.js"></script>
 @endsection

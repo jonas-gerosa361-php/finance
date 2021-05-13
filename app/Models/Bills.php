@@ -13,13 +13,14 @@ class Bills extends Model
         'value',
         'due_date',
         'repeatFor',
-        'repeatedFor'
+        'repeatedFor',
+        'paid'
     ];
     protected $table = 'bills';
 
     public function getRepeatedForAttribute($value)
     {
-        if ($value > 1) {
+        if ($value > 0) {
             return $value;
         }
 

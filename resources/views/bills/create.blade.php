@@ -16,7 +16,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="value">Valor</label>
-                <input required class="form-control" type="text" name="value">
+                <input required class="form-control" type="text" id="value" name="value">
             </div>
             <div class="mb-3">
                 <label for="repeat">Repetir transação?</label>

@@ -12,7 +12,8 @@ class Incomes extends Model
         'name',
         'description',
         'value',
-        'date'
+        'date',
+        'paid'
     ];
     protected $table = 'incomes';
 }

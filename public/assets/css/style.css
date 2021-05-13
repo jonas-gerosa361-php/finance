@@ -1,3 +1,26 @@
 main {
     margin-top: 2rem;
 }
+
+form div:nth-child(3) div {
+    display: flex;
+    color: gray;
+    border: 1px solid #ced4da;
+    padding: 0.2rem;
+    border-radius: 5px;
+}
+
+form div:nth-child(3) div span {
+    padding-top: 0.1rem;
+    position: absolute;
+}
+
+form div:nth-child(3) div input {
+    padding: 0.1rem 1.5rem;
+    border: none;
+    color: gray;
+}
+
+form div:nth-child(3) div input:focus {
+    color: gray;
+}

@@ -1,6 +1,7 @@
 (function () {
     const form = document.querySelector("form");
     const saveButton = document.querySelector("#saveButton");
+    const moneyInput = document.querySelector("#value");
 
     saveButton.addEventListener("click", (event) => {
         event.preventDefault();

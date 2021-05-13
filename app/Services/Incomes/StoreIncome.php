@@ -14,7 +14,7 @@ class StoreIncome
                 'name' => $args['name'],
                 'date' => $args['date'],
                 'description' => $args['description'],
-                'value' => $args['value']
+                'value' => str_replace(',', '.', $args['value']),
             ]);
             return json_encode([
                 'success' => true,
