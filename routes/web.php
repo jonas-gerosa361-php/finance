@@ -14,3 +14,5 @@ Route::get('/create-income', '\App\Http\Controllers\IncomesController@create');
 Route::post('/create-income', '\App\Http\Controllers\IncomesController@store');
 Route::post('/pay-bill', '\App\Http\Controllers\BillsController@payBill');
 Route::post('/receive-income', '\App\Http\Controllers\IncomesController@receiveIncome');
+Route::post('/bills/delete/{id}', '\App\Http\Controllers\BillsController@delete');
+Route::match(['get', 'post'], '/bills/edit/{id}', '\App\Http\Controllers\BillsController@edit');

@@ -8,6 +8,7 @@
     @stack('css')
     <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.css">
     <title>My Finance System</title>
   </head>
   <body>

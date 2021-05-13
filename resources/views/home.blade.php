@@ -25,6 +25,9 @@
                     <th>
                         Paga
                     </th>
+                    <th>
+                        Ações
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -49,10 +52,27 @@
                             </td>
                             <td class="text-center">
                                 @if ($bill->paid) 
-                                    <input onclick="payBill('{{$bill->id}}')" checked type="checkbox" name="paid" id="paid">
+                                    <input title="pagar" 
+                                        onclick="payBill('{{$bill->id}}')"
+                                        checked 
+                                        type="checkbox"
+                                        name="paid"
+                                        id="paid"
+                                    >
                                 @else 
-                                    <input onclick="payBill('{{$bill->id}}')" type="checkbox" name="paid" id="paid">
+                                    <input title="pagar"
+                                        onclick="payBill('{{$bill->id}}')"
+                                        type="checkbox"
+                                        name="paid"
+                                        id="paid"
+                                    >
                                 @endif
+                            </td>
+                            <td>
+                                <div class="d-flex flex-row-reverse justify-content-around">
+                                    <i onclick="deleteBill('{{$bill->id}}')" title="excluir" class="fas fa-trash-alt danger"></i>
+                                    <i onclick="editBill('{{$bill->id}}')" title="editar" class="edit fas fa-edit"></i>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

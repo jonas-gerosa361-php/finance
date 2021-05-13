@@ -24,3 +24,15 @@ form div:nth-child(3) div input {
 form div:nth-child(3) div input:focus {
     color: gray;
 }
+
+.danger {
+    color: rgba(255, 0, 0, 0.719);
+}
+
+.edit {
+    color: rgb(255, 166, 0);
+}
+
+.danger, .edit {
+    cursor: pointer;
+}
