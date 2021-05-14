@@ -4,13 +4,16 @@ namespace App\Services\Bills;
 
 use App\Models\Bills;
 use App\Exceptions\ValidatorException;
+use App\Helpers\Utils;
 
 class StoreBill
 {
     public function execute($args)
     {
         try {
-            $this->validate($args);
+            $requiredFields = array_keys($args);
+            Utils::validateArgs($args, $requiredFields);
+            
             Bills::create([
                 'name' => $args['name'],
                 'due_date' => $args['due_date'],
@@ -33,21 +36,6 @@ class StoreBill
                 'success' => false,
                 'message' => $e->getMessage(),
             ]);
-        }
-    }
-
-    private function validate($args)
-    {
-        $requiredFields = [
-            'name',
-            'due_date',
-            'value'
-        ];
-
-        foreach ($requiredFields as $required) {
-            if (empty($args[$required])) {
-                throw new ValidatorException("O campo [$required] é obrigatório");
-            }
         }
     }
 }

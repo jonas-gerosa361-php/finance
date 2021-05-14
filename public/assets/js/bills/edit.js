@@ -1,21 +1,21 @@
 (function () {
     const form = document.querySelector("form");
     const saveButton = document.querySelector("#saveButton");
+    const bill = document.querySelector("#bill").value;
 
     saveButton.addEventListener("click", (event) => {
         event.preventDefault();
 
         const data = new FormData(form);
         axios
-            .post("/create-bill", data)
+            .post(`/bills/edit/${bill}`, data)
             .then((response) => {
-                console.log(response);
                 if (response.data.success) {
                     Swal.fire({
                         icon: "success",
                         text: response.data.message,
                     });
-                    eraseForm();
+                    location.href = "/home";
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -33,7 +33,7 @@
     });
 
     toggleRepeatNTimesDiv();
-})(toggleRepeatNTimesDiv(), eraseForm());
+})(toggleRepeatNTimesDiv());
 
 function toggleRepeatNTimesDiv() {
     const repeat = document.querySelector("#repeat");
@@ -46,9 +46,4 @@ function toggleRepeatNTimesDiv() {
             repeatForInput.value = "";
         }
     });
-}
-
-function eraseForm() {
-    const form = document.querySelector("form");
-    form.reset();
 }

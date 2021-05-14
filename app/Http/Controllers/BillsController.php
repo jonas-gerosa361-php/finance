@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Services\Bills\DeleteBill;
+use App\Services\Bills\GetBill;
 use App\Services\Bills\PayBill;
 use Illuminate\Http\Request;
 use \App\Services\Bills\StoreBill;
+use App\Services\Bills\UpdateBill;
 
 class BillsController extends Controller
 {
@@ -24,9 +26,16 @@ class BillsController extends Controller
         return $action->execute($request->get('id'));
     }
 
-    public function edit()
+    public function edit(int $id, GetBill $action)
     {
-        //TODO:
+        $bill = $action->execute($id);
+        return view('bills.edit', compact('bill'));
+    }
+
+    public function update(Request $request, int $id, UpdateBill $action)
+    {
+        $request['id'] = $id;
+        return $action->execute($request->all());
     }
 
     public function delete(int $id, DeleteBill $action)

@@ -17,7 +17,7 @@ class CreateBillsTable extends Migration
             $table->id();
             $table->string('name');
             $table->double('value');
-            $table->timestamp('due_date');
+            $table->date('due_date');
             $table->integer('repeatFor')->nullable()->default(null);
             $table->integer('repeatedFor')->nullable()->default(null);
             $table->boolean('paid')->default(false);
