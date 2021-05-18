@@ -11,7 +11,12 @@ class StoreBill
     public function execute($args)
     {
         try {
-            $requiredFields = array_keys($args);
+            $requiredFields = [
+                'name',
+                'due_date',
+                'value',
+                'category'
+            ];
             Utils::validateArgs($args, $requiredFields);
             
             Bills::create([
@@ -19,6 +24,7 @@ class StoreBill
                 'due_date' => $args['due_date'],
                 'value' => str_replace(',', '.', $args['value']),
                 'repeatFor' => !empty($args['repeat']) ? $args['repeat-n-times'] : null,
+                'categories_id' => $args['category']
             ]);
             
             return json_encode([

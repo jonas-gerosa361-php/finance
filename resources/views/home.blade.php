@@ -4,6 +4,21 @@
 @endsection
 @section('content')
     <section>
+        <div class="container-fluid">
+            <form action="/home" method="POST">
+                @csrf
+                <label for="month" class="form-label">Filtrar por mês</label>
+                <input type="month"
+                    value="<?php if (empty($bills->month)) echo Date('Y-m'); if (!empty($bills->month)) echo $bills->month;?>" 
+                    class="form-group"
+                    name="month">
+                <button type="submit" class="btn btn-primary">
+                    Filtrar
+                </button>
+            </form>
+        </div>
+    </section>
+    <section class="mt-4">
         <h2>
             Despesas
         </h2>
@@ -14,6 +29,9 @@
                         Descrição
                     </th>
                     <th>
+                        Categoria
+                    </th>
+                    <th>
                         Valor
                     </th>
                     <th>
@@ -21,9 +39,6 @@
                     </th>
                     <th>
                         Recorrente
-                    </th>
-                    <th>
-                        Paga
                     </th>
                     <th>
                         Ações
@@ -38,6 +53,9 @@
                                 {{$bill->name}}
                             </td>
                             <td>
+                                {{$bill->categories->name}}
+                            </td>
+                            <td>
                                 R$ {{$bill->value}}
                             </td>
                             <td>
@@ -50,28 +68,15 @@
                                     {{$bill->repeatFor}}
                                 @endif
                             </td>
-                            <td class="text-center">
-                                @if ($bill->paid) 
-                                    <input title="pagar" 
-                                        onclick="payBill('{{$bill->id}}')"
-                                        checked 
-                                        type="checkbox"
-                                        name="paid"
-                                        id="paid"
-                                    >
-                                @else 
-                                    <input title="pagar"
-                                        onclick="payBill('{{$bill->id}}')"
-                                        type="checkbox"
-                                        name="paid"
-                                        id="paid"
-                                    >
-                                @endif
-                            </td>
                             <td>
                                 <div class="d-flex flex-row-reverse justify-content-around">
                                     <i onclick="deleteBill('{{$bill->id}}')" title="excluir" class="fas fa-trash-alt danger"></i>
                                     <i onclick="editBill('{{$bill->id}}')" title="editar" class="edit fas fa-edit"></i>
+                                    @if ($bill->paid) 
+                                        <i title="pagar" onclick="payBill('{{$bill->id}}')" class="success fas fa-check-circle"></i>
+                                    @else
+                                        <i title="pagar" onclick="payBill('{{$bill->id}}')" class="success-fade fas fa-check-circle"></i>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
@@ -100,7 +105,7 @@
                     Data
                 </th>
                 <th>
-                    Recebido
+                    Ações
                 </th>
             </thead>
             <tbody>
@@ -119,12 +124,16 @@
                             <td>
                                 {{\Carbon\Carbon::parse($income->date)->format('d/m/Y')}}
                             </td>
-                            <td class="text-center">
-                                @if ($income->paid)
-                                    <input onclick="receiveIncome('{{$income->id}}')" checked type="checkbox" name="received" id="received">
-                                @else
-                                    <input onclick="receiveIncome('{{$income->id}}')" type="checkbox" name="received" id="received">
-                                @endif
+                            <td>
+                                <div class="d-flex flex-row-reverse justify-content-around">
+                                    <i onclick="deleteIncome('{{$income->id}}')" title="excluir" class="fas fa-trash-alt danger"></i>
+                                    <i onclick="editIncome('{{$income->id}}')" title="editar" class="edit fas fa-edit"></i>
+                                    @if ($income->paid)
+                                        <i title="receber" onclick="receiveIncome('{{$income->id}}')" class="success fas fa-check-circle"></i>
+                                    @else
+                                        <i title="receber" onclick="receiveIncome('{{$income->id}}')"  class="success-fade fas fa-check-circle"></i>
+                                    @endif
+                                </div>
                             </td>
                         </tr>
                     @endforeach

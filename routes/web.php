@@ -8,12 +8,31 @@ Route::get('/', function () {
 
 //TODO: create middleware to auth
 Route::get('/home', '\App\Http\Controllers\HomeController@index');
-Route::get('/create-bill', '\App\Http\Controllers\BillsController@create');
-Route::post('/create-bill', '\App\Http\Controllers\BillsController@store');
-Route::get('/create-income', '\App\Http\Controllers\IncomesController@create');
-Route::post('/create-income', '\App\Http\Controllers\IncomesController@store');
-Route::post('/pay-bill', '\App\Http\Controllers\BillsController@payBill');
-Route::post('/receive-income', '\App\Http\Controllers\IncomesController@receiveIncome');
-Route::post('/bills/delete/{id}', '\App\Http\Controllers\BillsController@delete');
-Route::get('/bills/edit/{id}', '\App\Http\Controllers\BillsController@edit');
-Route::post('/bills/edit/{id}', '\App\Http\Controllers\BillsController@update');
+Route::post('/home', '\App\Http\Controllers\HomeController@index');
+
+Route::prefix('/incomes')->group(function () {
+    Route::get('/create', '\App\Http\Controllers\IncomesController@create');
+    Route::post('/create', '\App\Http\Controllers\IncomesController@store');
+    Route::post('/receive', '\App\Http\Controllers\IncomesController@receiveIncome');
+    Route::get('/edit/{id}', '\App\Http\Controllers\IncomesController@edit');
+    Route::post('/edit/{id}', '\App\Http\Controllers\IncomesController@update');
+    Route::post('/delete/{id}', '\App\Http\Controllers\IncomesController@delete');
+});
+
+Route::prefix('/bills')->group(function () {
+    Route::get('/create', '\App\Http\Controllers\BillsController@create');
+    Route::post('/create', '\App\Http\Controllers\BillsController@store');
+    Route::post('/pay', '\App\Http\Controllers\BillsController@payBill');
+    Route::get('/edit/{id}', '\App\Http\Controllers\BillsController@edit');
+    Route::post('/edit/{id}', '\App\Http\Controllers\BillsController@update');
+    Route::post('/delete/{id}', '\App\Http\Controllers\BillsController@delete');
+});
+
+Route::prefix('/categories')->group(function () {
+    Route::get('/', '\App\Http\Controllers\CategoriesController@index');
+    Route::get('/create', '\App\Http\Controllers\CategoriesController@create');
+    Route::post('/create', '\App\Http\Controllers\CategoriesController@store');
+    Route::get('/edit/{id}', '\App\Http\Controllers\CategoriesController@edit');
+    Route::post('/edit/{id}', '\App\Http\Controllers\CategoriesController@update');
+    Route::post('/delete/{id}', '\App\Http\Controllers\CategoriesController@delete');
+});

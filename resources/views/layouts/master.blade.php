@@ -29,8 +29,8 @@
         </footer>
         @stack('scripts')
         <script src="/assets/js/popper.min.js" ></script>
+        <script src="/assets/js/axios.js"></script>
         <script src="/assets/bootstrap/js/bootstrap.min.js"></script> 
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        <script src="/assets/js/axios.js"></script>
     </body>
 </html>

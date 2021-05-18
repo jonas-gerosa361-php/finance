@@ -2,6 +2,24 @@ main {
     margin-top: 2rem;
 }
 
+.nav-months {
+    list-style-type: none;
+    width: 100%;
+    display: flex;
+    border: 1px solid black;
+}
+
+.nav-months li {
+    background: lightgray;
+    padding: 1rem 1rem;
+    cursor: pointer;
+}
+
+.nav-months li:hover {
+    background: gray;
+    cursor: pointer;
+}
+
 form div:nth-child(3) div {
     display: flex;
     color: gray;
@@ -34,5 +52,15 @@ form div:nth-child(3) div input:focus {
 }
 
 .danger, .edit {
+    cursor: pointer;
+}
+
+.success-fade {
+    color: rgb(126, 228, 126);
+    cursor: pointer;
+}
+
+.success {
+    color: rgb(0, 156, 0);
     cursor: pointer;
 }

@@ -11,6 +11,16 @@
                 <input required type="text" class="form-control" name="name">
             </div>
             <div class="mb-3">
+                <label for="category" class="form-label">Categoria</label>
+                <select name="category" class="form-control">
+                    @if (!empty($categories))
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+            <div class="mb-3">
                 <label class="form-label" for="due_date">Vencimento</label>
                 <input required type="date" class="form-control" name="due_date">
             </div>

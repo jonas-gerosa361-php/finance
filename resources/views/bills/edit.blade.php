@@ -6,7 +6,11 @@
     <div class="mt-2 row col-md-6">
         <h2>Editar conta #{{$bill->id}}</h2>
         <form autocomplete="off" class="form-group">
-            <input hidden value="{{$bill->id}}" id="bill" type="text">
+            <input hidden
+                value="{{$bill->id}}"
+                id="bill"
+                type="text"
+            >
             <div class="mb-3">
                 <label class="form-label" for="name">Nome</label>
                 <input required type="text" value="{{$bill->name}}" class="form-control" name="name">

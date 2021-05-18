@@ -13,7 +13,6 @@ class UpdateBill
             $bill = Bills::find($args['id']);
             $args['repeat-n-times'] = $args['repeat-n-times'] || false;
             Utils::validateArgs($args, array_keys($args));
-            
 
             empty($args['name']) || $bill->name = $args['name'];
             empty($args['due_date']) || $bill->due_date = $args['due_date'];

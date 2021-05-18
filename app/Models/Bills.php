@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Bills extends Model
@@ -14,7 +13,8 @@ class Bills extends Model
         'due_date',
         'repeatFor',
         'repeatedFor',
-        'paid'
+        'paid',
+        'categories_id'
     ];
     protected $table = 'bills';
 
@@ -25,5 +25,10 @@ class Bills extends Model
         }
 
         return 0;
+    }
+
+    public function categories()
+    {
+        return $this->belongsTo(Categories::class);
     }
 }

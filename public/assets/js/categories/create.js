@@ -1,19 +1,18 @@
 (function () {
-    const form = document.querySelector("form");
     const saveButton = document.querySelector("#saveButton");
-
+    const name = document.querySelector("#name");
     saveButton.addEventListener("click", (event) => {
         event.preventDefault();
-        const data = new FormData(form);
         axios
-            .post("/incomes/create", data)
+            .post("/categories/create", {
+                name: name.value,
+            })
             .then((response) => {
                 if (response.data.success) {
                     Swal.fire({
                         icon: "success",
                         text: response.data.message,
                     });
-                    eraseForm();
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -29,9 +28,4 @@
                 });
             });
     });
-})(eraseForm());
-
-function eraseForm() {
-    const form = document.querySelector("form");
-    form.reset();
-}
+})();

@@ -8,12 +8,14 @@ use App\Services\Bills\PayBill;
 use Illuminate\Http\Request;
 use \App\Services\Bills\StoreBill;
 use App\Services\Bills\UpdateBill;
+use App\Services\Categories\ListCategories;
 
 class BillsController extends Controller
 {
-    public function create()
+    public function create(ListCategories $action)
     {
-        return view('bills.create');
+        $categories = $action->execute();
+        return view('bills.create', compact('categories'));
     }
 
     public function store(Request $request, StoreBill $action)

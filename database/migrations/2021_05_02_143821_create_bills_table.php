@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateBillsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('bills', function (Blueprint $table) {
@@ -21,14 +16,11 @@ class CreateBillsTable extends Migration
             $table->integer('repeatFor')->nullable()->default(null);
             $table->integer('repeatedFor')->nullable()->default(null);
             $table->boolean('paid')->default(false);
+            $table->integer('categories_id')->unsigned();
+            $table->foreign('categories_id')->references('id')->on('categories');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('bills');

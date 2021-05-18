@@ -6,38 +6,41 @@ use App\Exceptions\ValidatorException;
 use App\Helpers\Utils;
 use App\Models\Incomes;
 
-class StoreIncome
+class UpdateIncome
 {
-    public function execute($args)
+    public function execute(array $args): string
     {
         try {
+            $income = Incomes::find($args['id']);
+
             $requiredFields = [
                 'name',
-                'date',
-                'value'
+                'value',
+                'date'
             ];
             Utils::validateArgs($args, $requiredFields);
 
-            Incomes::create([
-                'name' => $args['name'],
-                'date' => $args['date'],
-                'description' => $args['description'],
-                'value' => str_replace(',', '.', $args['value']),
-            ]);
+            $income->name = $args['name'];
+            $income->date = $args['date'];
+            $income->value = $args['value'];
+            empty($args['description']) && $income->description = $args['description'];
+
+            $income->save();
+
             return json_encode([
                 'success' => true,
-                'message' => 'Receita cadastrada com sucesso',
+                'message' => 'Dados alterados'
             ]);
         } catch (ValidatorException $e) {
             return json_encode([
                 'success' => false,
                 'message' => $e->getMessage()
             ]);
-        } catch (\Exception $e) {
-            report($e);
+        } catch (\Throwable $th) {
+            report($th);
             return json_encode([
                 'success' => false,
-                'message' => 'Erro inesperado',
+                'message' => $th->getMessage()
             ]);
         }
     }

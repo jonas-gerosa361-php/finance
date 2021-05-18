@@ -8,12 +8,17 @@ use App\Services\Incomes\ListIncomes;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request, ListBills $listBillsAction, ListIncomes $listIncomesAction)
     {
-        $action = new ListBills();
-        $bills = $action->execute();
-        $action = new ListIncomes();
-        $incomes = $action->execute();
+        if (!empty($request->get('month'))) {
+            $bills = $listBillsAction->execute($request->get('month'));
+            $incomes = $listIncomesAction->execute($request->get('month'));
+            return view('home', compact('bills', 'incomes'));
+        }
+
+
+        $bills = $listBillsAction->execute();
+        $incomes = $listIncomesAction->execute();
         return view('home', compact('bills', 'incomes'));
     }
 }

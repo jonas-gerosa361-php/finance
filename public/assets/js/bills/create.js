@@ -7,7 +7,7 @@
 
         const data = new FormData(form);
         axios
-            .post("/create-bill", data)
+            .post("/bills/create", data)
             .then((response) => {
                 console.log(response);
                 if (response.data.success) {
