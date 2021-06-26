@@ -15,5 +15,5 @@
             </div>
         </form>
     </div>
-    <script src="/assets/js/categories/edit.js"></script>
+    <script src="/assets/js/categories/create.js"></script>
 @endsection
