@@ -1,6 +1,6 @@
 function payBill(bill) {
     axios
-        .post("/pay-bill", {
+        .post("/bills/pay", {
             id: bill,
         })
         .then((response) => {
@@ -25,7 +25,7 @@ function payBill(bill) {
 
 function receiveIncome(income) {
     axios
-        .post("/receive-income", {
+        .post("/incomes/receive", {
             id: income,
         })
         .then((response) => {
