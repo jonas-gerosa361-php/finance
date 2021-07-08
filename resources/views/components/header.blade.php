@@ -28,6 +28,9 @@
         <li class="nav-item">
             <a href="/categories" class="nav-link">Categorias</a>
         </li>
+        <li class="nav-item">
+            <a href="/accounts" class="nav-link">Contas</a>
+        </li>
       </ul>
     </div>
   </div>

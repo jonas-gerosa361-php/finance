@@ -36,3 +36,12 @@ Route::prefix('/categories')->group(function () {
     Route::post('/edit/{id}', '\App\Http\Controllers\CategoriesController@update');
     Route::post('/delete/{id}', '\App\Http\Controllers\CategoriesController@delete');
 });
+
+Route::prefix('/accounts')->group(function () {
+    Route::get('/', '\App\Http\Controllers\AccountsController@index');
+    Route::get('/create', '\App\Http\Controllers\AccountsController@create');
+    Route::post('/create', '\App\Http\Controllers\AccountsController@store');
+    Route::get('/edit/{id}', '\App\Http\Controllers\AccountsController@edit');
+    Route::post('/edit/{id}', '\App\Http\Controllers\AccountsController@update');
+    Route::post('/delete/{id}', '\App\Http\Controllers\AccountsController@destroy');
+});
