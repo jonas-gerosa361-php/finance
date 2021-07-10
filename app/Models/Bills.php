@@ -14,6 +14,8 @@ class Bills extends Model
         'repeatFor',
         'repeatedFor',
         'paid',
+        'pay_date',
+        'credit_card',
         'categories_id'
     ];
     protected $table = 'bills';

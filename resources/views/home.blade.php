@@ -4,20 +4,35 @@
 @endsection
 @section('content')
     <section>
-        <div class="container-fluid">
-            <form action="/home" method="POST">
-                @csrf
-                <label for="month" class="form-label">Filtrar por mês</label>
-                <input type="month"
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="container-fluid">
+                <form action="/home" method="POST">
+                    @csrf
+                    <label for="month" class="form-label">Filtrar por mês</label>
+                    <input type="month"
                     value="<?php if (empty($bills->month)) echo Date('Y-m'); if (!empty($bills->month)) echo $bills->month;?>" 
                     class="form-group"
                     name="month">
-                <button type="submit" class="btn btn-primary">
-                    Filtrar
-                </button>
-            </form>
+                    <button type="submit" class="btn btn-primary">
+                        Filtrar
+                    </button>
+                </form>
+            </div>
+            <div class="w-50">
+                <table class="table">
+                    <tbody>
+                        @foreach ($accounts as $account)
+                            <tr>
+                                <td class="">{{$account->name}}</td>
+                                <td>{{$account->balance}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
+    
     <section class="mt-4">
         <h2>
             Despesas
@@ -25,24 +40,14 @@
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th>
-                        Descrição
-                    </th>
-                    <th>
-                        Categoria
-                    </th>
-                    <th>
-                        Valor
-                    </th>
-                    <th>
-                        Vencimento
-                    </th>
-                    <th>
-                        Recorrente
-                    </th>
-                    <th>
-                        Ações
-                    </th>
+                    <th> Descrição </th>
+                    <th> Categoria </th>
+                    <th> Valor </th>
+                    <th> Vencimento </th>
+                    <th> Data pagamento </th>
+                    <th> Recorrente </th>
+                    <th> Status </th>
+                    <th> Ações </th>
                 </tr>
             </thead>
             <tbody>
@@ -62,21 +67,26 @@
                                 {{\Carbon\Carbon::parse($bill->due_date)->format('d/m/Y')}}
                             </td>
                             <td>
+                                @if ($bill->paid)
+                                    {{\Carbon\Carbon::parse($bill->pay_date)->format('d/m/Y')}}
+                                @endif
+                            </td>
+                            <td>
                                 @if (!empty($bill->repeatFor))
                                     {{$bill->repeatedFor}}
                                     /
                                     {{$bill->repeatFor}}
                                 @endif
                             </td>
+                            <td>{{$bill->status}}</td>
                             <td>
                                 <div class="d-flex flex-row-reverse justify-content-around">
                                     <i onclick="deleteBill('{{$bill->id}}')" title="excluir" class="fas fa-trash-alt danger"></i>
                                     <i onclick="editBill('{{$bill->id}}')" title="editar" class="edit fas fa-edit"></i>
-                                    @if ($bill->paid) 
-                                        <i title="pagar" onclick="payBill('{{$bill->id}}')" class="success fas fa-check-circle"></i>
-                                    @else
-                                        <i title="pagar" onclick="payBill('{{$bill->id}}')" class="success-fade fas fa-check-circle"></i>
-                                    @endif
+                                    <a href="/bills/{{$bill->id}}/pay">
+                                        <i title="pagar"
+                                            class="@if($bill->paid) success @else success-fade @endif fas fa-check-circle"></i>
+                                    </a>
                                 </div>
                             </td>
                         </tr>

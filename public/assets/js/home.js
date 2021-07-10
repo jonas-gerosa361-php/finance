@@ -1,4 +1,5 @@
-function payBill(bill) {
+function payBill(id) {
+    return;
     axios
         .post("/bills/pay", {
             id: bill,
@@ -14,7 +15,7 @@ function payBill(bill) {
                 text: response.data.message,
             });
         })
-        .catch((error) => {
+        .catch(() => {
             Swal.fire({
                 icon: "error",
                 text: "Erro inesperado",
