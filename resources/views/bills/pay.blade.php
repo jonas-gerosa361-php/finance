@@ -44,7 +44,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label" for="account">Conta</label>
+                <label class="form-label" for="account">Conta *</label>
                 <select id="accountId" class="form-control" name="account">
                     @foreach ($accounts as $account)
                         <option value="{{$account->id}}">{{$account->name}}</option>
@@ -52,7 +52,34 @@
                 </select>
             </div>
 
-            <div class="d-flex flex-row-reverse">
+            <div class="mb-3">
+                <label class="form-label" for="pay_date">Data do Pagamento *</label>
+                <input class="form-control"
+                    type="date"
+                    @if ($bill->paid)
+                        value="{{Carbon\Carbon::parse($bill->pay_date)->format('Y-m-d')}}"
+                    @endif
+                    name="pay_date"
+                    id="pay_date">
+            </div>
+
+            <div id="creditCardDiv" class="mb-3">
+                <label class="form-label" for="creditCard">Cartão de Crédito</label>
+                <select name="creditCard" id="creditCard" class="form-control">
+                    @if (!empty($bill->credit_card))
+                        <option selected value="{{$bill->credit_card}}">{{$bill->credit_card}}</option>
+                    @else
+                        <option value="">Escolher</option>
+                        <option value="Casas Bahia">Casas Bahia</option>
+                        <option value="Itaucard">Itaucard</option>
+                        <option value="Riachuelo">Riachuelo</option>
+                        <option value="Nubank Jonas">Nubank Jonas</option>
+                        <option value="Nubank Cal">Nubank Cal</option>
+                    @endif
+                </select>
+            </div>
+
+            <div class="mt-2 d-flex flex-row-reverse">
                 <button id="saveButton" class="btn btn-primary">
                     Pagar
                 </button>
