@@ -2,15 +2,25 @@
 
 namespace App\Services\Bills;
 
+use App\Models\Accounts;
 use App\Models\Bills;
 
 class PayBill
 {
-    public function execute(int $id)
+    public function execute(array $args)
     {
         try {
-            $bill = Bills::find($id);
-            $bill->paid ? $bill->paid = false : $bill->paid = true;
+            $account = Accounts::find($args['account']);
+            $bill = Bills::find($args['bill']);
+            
+            if ($bill->paid) {
+                $bill->paid = false;
+                $account->balance += $bill->value;
+            } else {
+                $bill->paid = true;
+                $account->balance -= $bill->value;
+            }
+
             
             if ($bill->repeatFor !== null && $bill->paid === true) {
                 $bill->repeatedFor = $bill->repeatedFor + 1;
@@ -20,6 +30,7 @@ class PayBill
                 $bill->repeatedFor = $bill->repeatedFor - 1;
             }
             $bill->save();
+            $account->save();
 
             return json_encode([
                 'success' => true,

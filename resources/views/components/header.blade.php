@@ -20,6 +20,9 @@
             <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
+            <a href="/accounts" class="nav-link">Contas</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="/bills/create">Cadastrar Despesa</a>
         </li>
         <li class="nav-item">
@@ -27,9 +30,6 @@
         </li>
         <li class="nav-item">
             <a href="/categories" class="nav-link">Categorias</a>
-        </li>
-        <li class="nav-item">
-            <a href="/accounts" class="nav-link">Contas</a>
         </li>
       </ul>
     </div>

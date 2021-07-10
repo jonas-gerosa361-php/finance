@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use \App\Services\Bills\StoreBill;
+use App\Services\Accounts\ListAccounts;
 use App\Services\Bills\DeleteBill;
 use App\Services\Bills\GetBill;
 use App\Services\Bills\PayBill;
-use Illuminate\Http\Request;
-use \App\Services\Bills\StoreBill;
 use App\Services\Bills\UpdateBill;
 use App\Services\Categories\ListCategories;
+use Illuminate\Http\Request;
 
 class BillsController extends Controller
 {
@@ -23,9 +24,19 @@ class BillsController extends Controller
         return $action->execute($request->all());
     }
 
-    public function payBill(Request $request, PayBill $action)
+    public function showPayView(int $id)
     {
-        return $action->execute($request->get('id'));
+        $action = new GetBill;
+        $bill = $action->execute($id);
+        $action = new ListAccounts;
+        $accounts = $action->execute();
+        return view('bills.pay', compact('bill', 'accounts'));
+    }
+
+    public function pay(Request $request, int $id, PayBill $action)
+    {
+        $request['bill'] = $id;
+        return $action->execute($request->all());
     }
 
     public function edit(int $id, GetBill $action)

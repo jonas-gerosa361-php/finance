@@ -22,7 +22,8 @@ Route::prefix('/incomes')->group(function () {
 Route::prefix('/bills')->group(function () {
     Route::get('/create', '\App\Http\Controllers\BillsController@create');
     Route::post('/create', '\App\Http\Controllers\BillsController@store');
-    Route::post('/pay', '\App\Http\Controllers\BillsController@payBill');
+    Route::get('/{id}/pay', '\App\Http\Controllers\BillsController@showPayView');
+    Route::post('/{id}/pay', '\App\Http\Controllers\BillsController@pay');
     Route::get('/edit/{id}', '\App\Http\Controllers\BillsController@edit');
     Route::post('/edit/{id}', '\App\Http\Controllers\BillsController@update');
     Route::post('/delete/{id}', '\App\Http\Controllers\BillsController@delete');

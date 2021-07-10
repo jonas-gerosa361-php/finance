@@ -72,11 +72,10 @@
                                 <div class="d-flex flex-row-reverse justify-content-around">
                                     <i onclick="deleteBill('{{$bill->id}}')" title="excluir" class="fas fa-trash-alt danger"></i>
                                     <i onclick="editBill('{{$bill->id}}')" title="editar" class="edit fas fa-edit"></i>
-                                    @if ($bill->paid) 
-                                        <i title="pagar" onclick="payBill('{{$bill->id}}')" class="success fas fa-check-circle"></i>
-                                    @else
-                                        <i title="pagar" onclick="payBill('{{$bill->id}}')" class="success-fade fas fa-check-circle"></i>
-                                    @endif
+                                    <a href="/bills/{{$bill->id}}/pay">
+                                        <i title="pagar"
+                                            class="@if($bill->paid) success @else success-fade @endif fas fa-check-circle"></i>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
