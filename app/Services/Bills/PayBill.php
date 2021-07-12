@@ -26,15 +26,12 @@ class PayBill
                 $account->balance += $bill->value;
                 $bill->pay_date = null;
                 $bill->status = null;
-                $bill->credit_card = null;
             } else {
                 $bill->paid = true;
                 $account->balance -= $bill->value;
                 $bill->pay_date = $args['pay_date'];
                 $bill->status = 'Pago';
-                $bill->credit_card = $args['creditCard'];
             }
-
             
             if ($bill->repeatFor !== null && $bill->paid === true) {
                 $bill->repeatedFor = $bill->repeatedFor + 1;

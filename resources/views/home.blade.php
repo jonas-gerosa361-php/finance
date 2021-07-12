@@ -47,6 +47,7 @@
                     <th> Data pagamento </th>
                     <th> Recorrente </th>
                     <th> Status </th>
+                    <th> Cardão de Crédito </th>
                     <th> Ações </th>
                 </tr>
             </thead>
@@ -54,18 +55,10 @@
                 @if (!empty($bills))
                     @foreach ($bills as $bill)
                         <tr>
-                            <td>
-                                {{$bill->name}}
-                            </td>
-                            <td>
-                                {{$bill->categories->name}}
-                            </td>
-                            <td>
-                                R$ {{$bill->value}}
-                            </td>
-                            <td>
-                                {{\Carbon\Carbon::parse($bill->due_date)->format('d/m/Y')}}
-                            </td>
+                            <td> {{$bill->name}} </td>
+                            <td> {{$bill->categories->name}} </td>
+                            <td> R$ {{$bill->value}} </td>
+                            <td> {{\Carbon\Carbon::parse($bill->due_date)->format('d/m/Y')}} </td>
                             <td>
                                 @if ($bill->paid)
                                     {{\Carbon\Carbon::parse($bill->pay_date)->format('d/m/Y')}}
@@ -78,7 +71,8 @@
                                     {{$bill->repeatFor}}
                                 @endif
                             </td>
-                            <td>{{$bill->status}}</td>
+                            <td>  {{$bill->status}} </td>
+                            <td> {{$bill->credit_card}} </td>
                             <td>
                                 <div class="d-flex flex-row-reverse justify-content-around">
                                     <i onclick="deleteBill('{{$bill->id}}')" title="excluir" class="fas fa-trash-alt danger"></i>

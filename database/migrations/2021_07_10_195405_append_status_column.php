@@ -14,7 +14,7 @@ class AppendStatusColumn extends Migration
     public function up()
     {
         Schema::table('bills', function ($table) {
-            $table->string('status')->nullable()->default('null');
+            $table->string('status')->nullable()->default(null);
         });
     }
 
