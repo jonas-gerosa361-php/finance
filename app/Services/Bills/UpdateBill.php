@@ -2,8 +2,8 @@
 
 namespace App\Services\Bills;
 
-use App\Models\Bills;
 use App\Helpers\Utils;
+use App\Models\Bills;
 
 class UpdateBill
 {
@@ -16,6 +16,7 @@ class UpdateBill
 
             empty($args['name']) || $bill->name = $args['name'];
             empty($args['due_date']) || $bill->due_date = $args['due_date'];
+            empty($args['credit_card']) || $bill->credit_card = $args['credit_card'];
             empty($args['value']) || $bill->value = str_replace(',', '.', $args['value']);
             $args['repeat-n-times'] !== false || $bill->repeatFor = $args['repeat-n-times'];
 

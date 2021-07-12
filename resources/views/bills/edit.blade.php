@@ -11,18 +11,38 @@
                 id="bill"
                 type="text"
             >
+            
             <div class="mb-3">
                 <label class="form-label" for="name">Nome</label>
                 <input required type="text" value="{{$bill->name}}" class="form-control" name="name">
             </div>
+            
             <div class="mb-3">
                 <label class="form-label" for="due_date">Vencimento</label>
                 <input required type="date" value="{{Carbon\Carbon::parse($bill->due_date)->format('Y-m-d')}}" class="form-control" name="due_date">
             </div>
+            
             <div class="mb-3">
                 <label class="form-label" for="value">Valor</label>
                 <input required class="form-control" value="{{$bill->value}}" type="text" id="value" name="value">
             </div>
+
+            <div id="creditCardDiv" class="mb-3">
+                <label class="form-label" for="creditCard">Cartão de Crédito</label>
+                <select name="credit_card" id="creditCard" class="form-control">
+                    @if (!empty($bill->credit_card))
+                        <option selected value="{{$bill->credit_card}}">{{$bill->credit_card}} *</option>
+                    @else
+                        <option value="">Escolher</option>
+                    @endif
+                        <option value="Casas Bahia">Casas Bahia</option>
+                        <option value="Itaucard">Itaucard</option>
+                        <option value="Riachuelo">Riachuelo</option>
+                        <option value="Nubank Jonas">Nubank Jonas</option>
+                        <option value="Nubank Cal">Nubank Cal</option>
+                </select>
+            </div>
+            
             <div class="mb-3">
                 <label for="repeat">Repetir transação?</label>
                 @if (empty($bill->repeatFor))
@@ -30,6 +50,7 @@
                 @else 
                     <input checked id="repeat" type="checkbox" name="repeat">
                 @endif
+            
             </div>
             @if (empty($bill->repeatFor))
                 <div style="display: none" id="hidden" class="mb-3">

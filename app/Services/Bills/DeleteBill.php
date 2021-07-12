@@ -10,8 +10,15 @@ class DeleteBill
     {
         try {
             $bill = Bills::find($id);
+            
+            if ($bill->paid) {
+                return json_encode([
+                    'success' => false,
+                    'message' => 'Não é possível deletar uma conta paga'
+                ]);
+            }
+            
             $bill->delete();
-
             return json_encode([
                 'success' => true,
                 'message' => 'Conta deletada'

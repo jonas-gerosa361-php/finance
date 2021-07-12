@@ -2,9 +2,9 @@
 
 namespace App\Services\Bills;
 
-use App\Models\Bills;
 use App\Exceptions\ValidatorException;
 use App\Helpers\Utils;
+use App\Models\Bills;
 
 class StoreBill
 {
@@ -24,7 +24,8 @@ class StoreBill
                 'due_date' => $args['due_date'],
                 'value' => str_replace(',', '.', $args['value']),
                 'repeatFor' => !empty($args['repeat']) ? $args['repeat-n-times'] : null,
-                'categories_id' => $args['category']
+                'categories_id' => $args['category'],
+                'credit_card' => $args['credit_card']
             ]);
             
             return json_encode([

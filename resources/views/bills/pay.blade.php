@@ -43,6 +43,22 @@
                 >
             </div>
 
+            <div id="creditCardDiv" class="mb-3">
+                <label class="form-label" for="creditCard">Cartão de Crédito</label>
+                <select disabled name="creditCard" id="creditCard" class="form-control">
+                    @if (!empty($bill->credit_card))
+                        <option selected value="{{$bill->credit_card}}">{{$bill->credit_card}}</option>
+                    @else
+                        <option value="">Escolher</option>
+                        <option value="Casas Bahia">Casas Bahia</option>
+                        <option value="Itaucard">Itaucard</option>
+                        <option value="Riachuelo">Riachuelo</option>
+                        <option value="Nubank Jonas">Nubank Jonas</option>
+                        <option value="Nubank Cal">Nubank Cal</option>
+                    @endif
+                </select>
+            </div>
+
             <div class="mb-3">
                 <label class="form-label" for="account">Conta *</label>
                 <select id="accountId" class="form-control" name="account">
@@ -61,22 +77,6 @@
                     @endif
                     name="pay_date"
                     id="pay_date">
-            </div>
-
-            <div id="creditCardDiv" class="mb-3">
-                <label class="form-label" for="creditCard">Cartão de Crédito</label>
-                <select name="creditCard" id="creditCard" class="form-control">
-                    @if (!empty($bill->credit_card))
-                        <option selected value="{{$bill->credit_card}}">{{$bill->credit_card}}</option>
-                    @else
-                        <option value="">Escolher</option>
-                        <option value="Casas Bahia">Casas Bahia</option>
-                        <option value="Itaucard">Itaucard</option>
-                        <option value="Riachuelo">Riachuelo</option>
-                        <option value="Nubank Jonas">Nubank Jonas</option>
-                        <option value="Nubank Cal">Nubank Cal</option>
-                    @endif
-                </select>
             </div>
 
             <div class="mt-2 d-flex flex-row-reverse">
