@@ -33,14 +33,6 @@ class PayBill
                 $bill->status = 'Pago';
             }
             
-            if ($bill->repeatFor !== null && $bill->paid === true) {
-                $bill->repeatedFor = $bill->repeatedFor + 1;
-            }
-
-            if ($bill->repeatFor !== null && $bill->paid === false) {
-                $bill->repeatedFor = $bill->repeatedFor - 1;
-            }
-
             $bill->save();
             $account->save();
 

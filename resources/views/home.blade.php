@@ -32,78 +32,14 @@
             </div>
         </div>
     </section>
-    
-    <section class="mt-4">
-        <div class="d-flex justify-content-between">
-            <div>
-                <h2> Despesas </h2>
-            </div>
-            <div>
-                <span>Previsão: {{$bills->prevision}} / </span>
-                <span>Realizado: {{$bills->realized}} </span>
-            </div>
-        </div>
-        <table class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th> Descrição </th>
-                    <th> Categoria </th>
-                    <th> Valor </th>
-                    <th> Vencimento </th>
-                    <th> Data pagamento </th>
-                    <th> Recorrente </th>
-                    <th> Status </th>
-                    <th> Cardão de Crédito </th>
-                    <th> Ações </th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (!empty($bills))
-                    @foreach ($bills as $bill)
-                        <tr>
-                            <td> {{$bill->name}} </td>
-                            <td> {{$bill->categories->name}} </td>
-                            <td> R$ {{$bill->value}} </td>
-                            <td> {{\Carbon\Carbon::parse($bill->due_date)->format('d/m/Y')}} </td>
-                            <td>
-                                @if ($bill->paid)
-                                    {{\Carbon\Carbon::parse($bill->pay_date)->format('d/m/Y')}}
-                                @endif
-                            </td>
-                            <td>
-                                @if (!empty($bill->repeatFor))
-                                    {{$bill->repeatedFor}}
-                                    /
-                                    {{$bill->repeatFor}}
-                                @endif
-                            </td>
-                            <td>  {{$bill->status}} </td>
-                            <td> {{$bill->credit_card}} </td>
-                            <td>
-                                <div class="d-flex flex-row-reverse justify-content-around">
-                                    <i onclick="deleteBill('{{$bill->id}}')" title="excluir" class="fas fa-trash-alt danger"></i>
-                                    <i onclick="editBill('{{$bill->id}}')" title="editar" class="edit fas fa-edit"></i>
-                                    <a href="/bills/{{$bill->id}}/pay">
-                                        <i title="pagar"
-                                            class="@if($bill->paid) success @else success-fade @endif fas fa-check-circle"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif
-            </tbody>
-        </table>
-    </section>
 
-    <section class="mt-4">
+        <section class="mt-4">
         <div class="d-flex justify-content-between">
             <div>
                 <h2> Receitas </h2>
             </div>
             <div>
-                <span>Previsão: {{$incomes->prevision}} / </span>
-                <span>Realizado: {{$incomes->realized}} </span>
+                <p class="fw-bold">Previsão: {{$incomes->prevision}} / Realizado: {{$incomes->realized}}</p>
             </div>
         </div>
         <table class="table table-striped">
@@ -157,6 +93,71 @@
             </tbody>
         </table>
     </section>
+    <div class="mt-5 mb-5">
+        <hr>
+    </div>
+    <section class="mt-4">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h2> Despesas </h2>
+            </div>
+            <div>
+                <p class="fw-bold">Previsão: {{$bills->prevision}} / Realizado: {{$bills->realized}}</p>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th> Descrição </th>
+                    <th> Categoria </th>
+                    <th> Valor </th>
+                    <th> Vencimento </th>
+                    <th> Data pagamento </th>
+                    <th> Recorrente </th>
+                    <th> Status </th>
+                    <th> Cartão de Crédito </th>
+                    <th> Ações </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!empty($bills))
+                    @foreach ($bills as $bill)
+                        <tr>
+                            <td> {{$bill->name}} </td>
+                            <td> {{$bill->categories->name}} </td>
+                            <td> R$ {{$bill->value}} </td>
+                            <td> {{\Carbon\Carbon::parse($bill->due_date)->format('d/m/Y')}} </td>
+                            <td>
+                                @if ($bill->paid)
+                                    {{\Carbon\Carbon::parse($bill->pay_date)->format('d/m/Y')}}
+                                @endif
+                            </td>
+                            <td>
+                                @if (!empty($bill->repeatFor))
+                                    {{$bill->repeatedFor}}
+                                    /
+                                    {{$bill->repeatFor}}
+                                @endif
+                            </td>
+                            <td>  {{$bill->status}} </td>
+                            <td> {{$bill->credit_card}} </td>
+                            <td>
+                                <div class="d-flex flex-row-reverse justify-content-around">
+                                    <i onclick="deleteBill('{{$bill->id}}')" title="excluir" class="fas fa-trash-alt danger"></i>
+                                    <i onclick="editBill('{{$bill->id}}')" title="editar" class="edit fas fa-edit"></i>
+                                    <a href="/bills/{{$bill->id}}/pay">
+                                        <i title="pagar"
+                                            class="@if($bill->paid) success @else success-fade @endif fas fa-check-circle"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
+        </table>
+    </section>
+
     <script src="/assets/js/axios.js"></script>
     <script src="/assets/js/home.js"></script>
 @endsection

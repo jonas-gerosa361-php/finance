@@ -11,9 +11,14 @@ class UpdateBill
     {
         try {
             $bill = Bills::find($args['id']);
+            $requiredFields = [
+                'name',
+                'due_date',
+                'value'
+            ];
+            Utils::validateArgs($args, $requiredFields);
+            
             $args['repeat-n-times'] = $args['repeat-n-times'] || false;
-            Utils::validateArgs($args, array_keys($args));
-
             empty($args['name']) || $bill->name = $args['name'];
             empty($args['due_date']) || $bill->due_date = $args['due_date'];
             empty($args['credit_card']) || $bill->credit_card = $args['credit_card'];
