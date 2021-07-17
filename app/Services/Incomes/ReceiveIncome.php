@@ -2,6 +2,7 @@
 
 namespace App\Services\Incomes;
 
+use App\Models\Accounts;
 use App\Models\Incomes;
 
 class ReceiveIncome
@@ -11,7 +12,12 @@ class ReceiveIncome
         try {
             $income = Incomes::find($id);
             $income->paid ? $income->paid = false : $income->paid = true;
+            
+            $account = Accounts::find($income->account_id);
+            $income->paid ? $account->balance += $income->value : $account->balance -= $income->value;
+            
             $income->save();
+            $account->save();
 
             return json_encode([
                 'success' => true,

@@ -10,17 +10,29 @@
                 <label class="form-label" for="name">Nome</label>
                 <input required type="text" class="form-control" name="name">
             </div>
+            
             <div class="mb-3">
                 <label for="description" class="form-label">Descrição</label>
                 <input required type="text" name="description" class="form-control">
             </div>
+            
             <div class="mb-3">
                 <label class="form-label" for="value">Valor</label>
                 <input required class="form-control" type="text" id="value" name="value">
             </div>
+            
             <div class="mb-3">
                 <label class="form-label" for="due_date">Data</label>
                 <input required type="date" class="form-control" name="date">
+            </div>
+
+            <div class="mb-3">
+                <label for="account" class="form-label">Conta</label>
+                <select name="account" class="form-control" id="account">
+                    @foreach ($accounts as $account)
+                        <option value="{{$account->id}}">{{$account->name}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="d-flex flex-row-reverse">
                 <button id="saveButton" class="btn btn-primary">

@@ -16,13 +16,15 @@ class UpdateIncome
             $requiredFields = [
                 'name',
                 'value',
-                'date'
+                'date',
+                'account'
             ];
             Utils::validateArgs($args, $requiredFields);
 
             $income->name = $args['name'];
             $income->date = $args['date'];
             $income->value = $args['value'];
+            $income->account_id = $args['account'];
             empty($args['description']) && $income->description = $args['description'];
 
             $income->save();

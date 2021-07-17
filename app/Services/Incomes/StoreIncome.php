@@ -14,7 +14,8 @@ class StoreIncome
             $requiredFields = [
                 'name',
                 'date',
-                'value'
+                'value',
+                'account'
             ];
             Utils::validateArgs($args, $requiredFields);
 
@@ -23,6 +24,7 @@ class StoreIncome
                 'date' => $args['date'],
                 'description' => $args['description'],
                 'value' => str_replace(',', '.', $args['value']),
+                'account_id' => $args['account']
             ]);
             return json_encode([
                 'success' => true,

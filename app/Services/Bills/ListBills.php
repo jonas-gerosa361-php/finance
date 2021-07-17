@@ -13,7 +13,7 @@ class ListBills
         $date = Carbon::now();
         if ($month == 0) {
             $month = str_pad($date->month, 2, '0', STR_PAD_LEFT);
-            return Bills::where('due_date', 'like', "%-$month-%")
+            $bills = Bills::where('due_date', 'like', "%-$month-%")
                 ->with('categories')
                 ->orderBy('due_date', 'DESC')
                 ->get();
@@ -23,7 +23,37 @@ class ListBills
             ->with('categories')
             ->orderBy('due_date', 'DESC')
             ->get();
+
+
         $bills->month = $monthYear;
+        $bills->prevision = $this->appendPrevisionColumn($bills);
+        $bills->realized = $this->appendRealizedColumn($bills);
         return $bills;
+    }
+
+    private function appendPrevisionColumn($bills)
+    {
+        $response = 0;
+        foreach ($bills as $bill) {
+            $response += $bill->value;
+        }
+        
+        return $response;
+    }
+
+    private function appendRealizedColumn($bills)
+    {
+        $response = 0;
+        foreach ($bills as $bill) {
+            if (empty($bill->paid)) {
+                continue;
+            }
+
+            if ($bill->paid) {
+                $response += $bill->value;
+            }
+        }
+
+        return $response;
     }
 }

@@ -11,6 +11,7 @@
                 value="{{$income->id}}"
                 id="income"
             >
+            
             <div class="mb-3">
                 <label class="form-label" for="name">Nome</label>
                 <input required 
@@ -20,6 +21,7 @@
                     name="name"
                 >
             </div>
+            
             <div class="mb-3">
                 <label for="description" class="form-label">Descrição</label>
                 <input required
@@ -29,6 +31,7 @@
                     class="form-control"
                 >
             </div>
+            
             <div class="mb-3">
                 <label class="form-label" for="value">Valor</label>
                 <input required
@@ -39,6 +42,7 @@
                     name="value"
                 >
             </div>
+            
             <div class="mb-3">
                 <label class="form-label" for="due_date">Data</label>
                 <input required
@@ -48,6 +52,20 @@
                     name="date"
                 >
             </div>
+
+            <div class="mb-3">
+                <label for="account" class="form-label">Conta</label>
+                <select name="account" class="form-control" id="account">
+                    @foreach ($accounts as $account)
+                        @if ($account->id == $income->account_id)
+                            <option selected value="{{$account->id}}">{{$account->name}} *</option>
+                        @else 
+                            <option value="{{$account->id}}">{{$account->name}}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+
             <div class="d-flex flex-row-reverse">
                 <button id="saveButton" class="btn btn-primary">
                     Editar

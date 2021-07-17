@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Accounts\ListAccounts;
 use App\Services\Incomes\DeleteIncome;
 use App\Services\Incomes\GetIncome;
 use App\Services\Incomes\ReceiveIncome;
-use Illuminate\Http\Request;
 use App\Services\Incomes\StoreIncome;
 use App\Services\Incomes\UpdateIncome;
+use Illuminate\Http\Request;
 
 class IncomesController extends Controller
 {
-    public function create()
+    public function create(ListAccounts $action)
     {
-        return view('incomes.create');
+        $accounts = $action->execute();
+        return view('incomes.create', compact('accounts'));
     }
 
     public function store(Request $request, StoreIncome $action)
@@ -26,10 +28,11 @@ class IncomesController extends Controller
         return $action->execute($request->get('id'));
     }
 
-    public function edit(int $id, GetIncome $action)
+    public function edit(int $id, GetIncome $action, ListAccounts $listAccountsAction)
     {
         $income = $action->execute($id);
-        return view('incomes.edit', compact('income'));
+        $accounts = $listAccountsAction->execute();
+        return view('incomes.edit', compact('income', 'accounts'));
     }
 
     public function update(Request $request, int $id, UpdateIncome $action)

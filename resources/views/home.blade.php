@@ -34,9 +34,15 @@
     </section>
     
     <section class="mt-4">
-        <h2>
-            Despesas
-        </h2>
+        <div class="d-flex justify-content-between">
+            <div>
+                <h2> Despesas </h2>
+            </div>
+            <div>
+                <span>Previsão: {{$bills->prevision}} / </span>
+                <span>Realizado: {{$bills->realized}} </span>
+            </div>
+        </div>
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
@@ -91,9 +97,15 @@
     </section>
 
     <section class="mt-4">
-        <h2>
-            Receitas
-        </h2>
+        <div class="d-flex justify-content-between">
+            <div>
+                <h2> Receitas </h2>
+            </div>
+            <div>
+                <span>Previsão: {{$incomes->prevision}} / </span>
+                <span>Realizado: {{$incomes->realized}} </span>
+            </div>
+        </div>
         <table class="table table-striped">
             <thead class="thead-light">
                 <th>
